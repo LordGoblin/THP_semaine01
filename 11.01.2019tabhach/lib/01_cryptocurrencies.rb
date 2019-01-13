@@ -26,27 +26,8 @@ def plus_gros
 	hach = myhach
 	i = 0
 	b = 0
-	c = 0
-	a = [0,0,0]	
-	while i < 3
-		while b < array.size
-			if a[i].to_f < hach[array[b]][1..-1].to_f && a[0].to_f != hach[array[b]][1..-1].to_f && a[1].to_f != hach[array[b]][1..-1].to_f
-				a[i] = hach[array[b]][1..-1].to_f	
-				c = b
-			end
-			b = b + 1
-		end
-		puts "#{array[c]}: $#{a[i]}"
-		b = 0
-		i = i + 1
-	end
-end
-
-def plus_gros2
-	hach = myhach
-	i = 0
-	b = 0
-	a = [100,100,100]	
+	a = [100,100,100]
+	puts "les 3 plus gros :"	
 	while i < 3
 		while b < array.size
 			if hach[array[a[i]]][1..-1].to_f < hach[array[b]][1..-1].to_f && hach[array[a[0]]][1..-1].to_f != hach[array[b]][1..-1].to_f && hach[array[a[1]]][1..-1].to_f != hach[array[b]][1..-1].to_f
@@ -60,6 +41,70 @@ def plus_gros2
 	end
 end
 
+def plus_petit
+	hach = myhach
+	i = 0
+	b = 0
+	a = [100,100,100]
+	puts "les 3 plus petit :"
+	while i < 3
+		while b < array.size
+			if hach[array[a[i]]][1..-1].to_f > hach[array[b]][1..-1].to_f && hach[array[a[0]]][1..-1].to_f != hach[array[b]][1..-1].to_f && hach[array[a[1]]][1..-1].to_f != hach[array[b]][1..-1].to_f
+				a[i] = b
+			end
+			b = b + 1
+		end
+		puts "#{array[a[i]]}: #{array2[a[i]]}"
+		b = 0
+		i = i + 1
+	end
+end
+
+def prenom_coin
+	i = 0
+	j = 0
+	a = 0
+	while i < array.size
+		string = array[i]
+		while j < string.size
+			if string[j..j+3] == "coin" || string[j..j+3] == "Coin"
+				a = a + 1
+			end
+			j = j + 1
+		end
+		j = 0
+		i = i + 1
+	end
+	puts "il y a #{a} crypto avec 'coin' et 'Coin'"
+end
+
+def plus_petit_6000
+	hach = myhach
+	i = 0
+	a = 0
+	while i < array.size
+		if hach[array[i]][1..-1].to_f < 6000
+			puts "#{array[i]}: #{array2[i]}"
+			a = a + 1
+		end
+		i = i + 1
+	end
+	puts "il y a #{a} crypto < 6000 sur #{array.size} crypto"
+end
+
+def plus_gros_6000
+	hach = myhach
+	i = 0
+	a = 1
+	while i < array.size
+		if hach[array[i]][1..-1].to_f < 6000 && hach[array[a]][1..-1].to_f < hach[array[i]][1..-1].to_f
+			a = i
+		end
+		i = i + 1
+	end
+	puts "la plus grosse devise < 6000 : #{array[a]}: #{array2[a]}"
+end
+
 def perform
 	i = true
 	while i != false
@@ -68,23 +113,23 @@ def perform
 		i = gets.chomp.to_i
 		if i == 1
 			system("clear")
-			plus_gros2
+			plus_gros
 			print "\n\n"
 		elsif i == 2
 			system("clear")
-
+			plus_petit
 			print "\n\n"
 		elsif i == 3
 			system("clear")
-
+			prenom_coin
 			print "\n\n"
 		elsif i == 4
 			system("clear")
-
+			plus_petit_6000
 			print "\n\n"
 		elsif i == 5
 			system("clear")
-
+			plus_gros_6000
 			print "\n\n"	
 		else
 			puts "a++"
